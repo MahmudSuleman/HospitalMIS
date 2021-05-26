@@ -21,15 +21,15 @@
 
 
             <li>
-                <h3 class="navigation-title">Components</h3>
+                <h3 class="navigation-title">Setups</h3>
             </li>
 
-            <li><a href="#"><i class="mdi mdi-diamond"></i> <span>Icons</span></a>
+            <li><a href="{{route('user.index')}}"><i class="fa fa-user"></i> <span>Users</span></a>
 
             </li>
             <li class="menu-list"><a href="javascript:;"><i class="mdi mdi-table"></i> <span>Tables</span></a>
                 <ul class="child-list">
-                    <li><a href="tables-basic.html"> Basic Table</a></li>
+                    <li><a href="#"> Basic Table</a></li>
 
                 </ul>
             </li>
@@ -104,11 +104,7 @@
             <div class="col-lg-12 col-sm-12">
                 <div class="row">
                     <div class="col-sm-12">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                            </div>
-                        </div>
+                       @yield('content')
                     </div>
                 </div>
             </div>
@@ -128,3 +124,4 @@
 <!--end body content-->
 
 @include('includes.footer')
+@yield('scripts')

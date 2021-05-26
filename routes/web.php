@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Setups\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,14 +15,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->middleware(['auth']);
+
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware(['auth']);
-Route::get('/user', function (){
-    dd(User::all());
+Route::middleware('auth')->group(function(){
+
+    Route::get('/', function () {
+    return view('home');
+});
+    Route::prefix('setup')->group(function(){
+        Route::resource('/user', 'Setups\UserController');
+    });
+});
+
+Route::get('/options', function (){
 });
 
