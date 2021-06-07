@@ -79,11 +79,12 @@ class UserController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param int $id
-     * @return void
+     * @return Application|Factory|View|void
      */
     public function edit(int $id)
     {
-        //
+        $user = user::find($id);
+        return view('setups.users.edit', compact('user'));
     }
 
     /**
@@ -91,21 +92,48 @@ class UserController extends Controller
      *
      * @param Request $request
      * @param int $id
-     * @return void
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, int $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255'],
+            'role_id' => ['required'],
+        ]);
+
+        $user = User::where('id', $user->id)->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'role_id' => $request->role_id
+        ]);
+
+        return back()->with('success', 'User Updated Successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
-     * @return void
+     * @param User $user
+     * @return Application|\Illuminate\Contracts\Routing\ResponseFactory|\Illuminate\Http\RedirectResponse|Response
      */
     public function destroy(int $id)
     {
-        //
+        $user = User::find($id);
+
+        $user->delete();
+            return back()->with('success', 'User Deleted Successfully');
+    }
+
+    public function changePassword(Request $request, User $user){
+        $request->validate([
+            'password' => ['required', 'string', 'min:8', 'confirmed']
+        ]);
+
+        $user::where('id', $user->id)->update([
+            'password' => hash::make($request->password)
+        ]);
+
+        return back()->with('success', 'Password Updated Successfully');
     }
 }
