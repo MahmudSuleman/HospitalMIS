@@ -30,6 +30,10 @@
     <link href="{{asset('/syntra/assets/plugins/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('/syntra/assets/plugins/datatables/buttons.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('/syntra/assets/plugins/datatables/responsive.bootstrap4.min.css')}}" rel="stylesheet" type="text/css" />
+
+    <!-- Sweet Alert css -->
+    <link href="{{asset('/syntra/assets/plugins/sweet-alert/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
+
     <!-- Styles -->
 {{--    <link href="{{ resource_path('css/app.css') }}" rel="stylesheet">--}}
 </head>

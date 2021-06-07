@@ -25,6 +25,9 @@
 <script src="{{asset('/syntra/assets/plugins/datatables/dataTables.responsive.min.js')}}"></script>
 <script src="{{asset('/syntra/assets/plugins/datatables/responsive.bootstrap4.min.js')}}"></script>
 
+<!-- Sweet Alert Js  -->
+<script src="{{asset('/syntra/assets/plugins/sweet-alert/sweetalert2.min.js')}}"></script>
+<script src="{{asset('/syntra/assets/pages/jquery.sweet-alert.init.js')}}"></script>
 
 <!--app js-->
 <script src="{{asset('/syntra/assets/js/jquery.app.js')}}"></script>

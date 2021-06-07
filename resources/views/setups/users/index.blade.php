@@ -16,10 +16,14 @@
 
             </div>
             <hr>
+            <div class="row">
+                <div class="col">
+                    @include('flash-message')
+                </div>
+            </div>
             <table class="table table-striped" id="tbl_user">
                 <thead>
                 <tr>
-                    <th hidden></th>
                     <th>Username</th>
                     <th>Email</th>
                     <th>Role</th>
@@ -29,20 +33,23 @@
                 <tbody>
                 @foreach($users as $user)
                     <tr>
-                        <td hidden>{{$user->id}}</td>
                         <td>{{$user->name}}</td>
                         <td>{{$user->email}}</td>
                         <td>{{$user->role->name}}</td>
                         <td>
-                            <a class="btn btn-warning" href="#"><i class="fa fa-edit"></i> Edit</a>
-                            <a class="btn btn-danger" href="#"><i class="fa fa-trash"></i> Delete</a>
-                        </td>
+                            <a class="btn btn-warning" href="{{route('user.edit', [$user])}}"><i class="fa fa-edit"></i> Edit</a>
+                            <form  action="{{Route('user.destroy', [$user->id])}}" method="post" style="display: inline">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger inline">Delete</button>
+                            </form>                        </td>
                     </tr>
                 @endforeach
                 </tbody>
             </table>
 
         </div>
+
     </div>
 @endsection
 @section('scripts')
@@ -55,9 +62,38 @@
             }]
         })
 
-        $('#tbl_user tbody').on('click', 'tr', function (e) {
-            var data = user_table.row(this).data();
-            console.log(data);
-        })
+        //Warning Message
+        $('.sa-warning').click(function (e) {
+            let todo = false;
+            swal({
+                title: 'Are you sure?',
+                text: "You won't be able to revert this!",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#4fa7f3',
+                cancelButtonColor: '#d57171',
+                confirmButtonText: 'Yes, delete it!'
+            }).then(function (e) {
+
+
+                if(e.value === true){
+                    $.ajax({
+                            'url': "{{route('user.destroy', [$user])}}",
+                            method: 'delete'
+                        }
+                    )
+                    // swal(
+                    //     'Deleted!',
+                    //     'Your data has been deleted.',
+                    //     'success'
+                    // )
+                }
+
+
+
+            })
+
+            return todo;
+        });
     </script>
 @endsection
