@@ -3,6 +3,7 @@
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Setups\UserController;
+use App\Http\Controllers\Setups\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,19 +17,23 @@ use App\Http\Controllers\Setups\UserController;
 */
 
 
-
 Auth::routes();
 
-Route::middleware('auth')->group(function(){
+Route::middleware('auth')->group(function () {
 
     Route::get('/', function () {
-    return view('home');
-});
-    Route::prefix('setup')->group(function(){
-        Route::resource('/user', 'Setups\UserController');
+        return view('home');
     });
+
+    Route::prefix('setup')->group(function () {
+        Route::put('/user/{user}/changePassword', [UserController::class, 'changePassword'])->name('user.changePassword');
+        Route::resource('/user', 'Setups\UserController');
+
+        Route::resource('/department', 'Setups\DepartmentController');
+    });
+
 });
 
-Route::get('/options', function (){
+Route::get('/options', function () {
 });
 
