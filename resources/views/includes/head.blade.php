@@ -35,7 +35,7 @@
     <link href="{{asset('/syntra/assets/plugins/sweet-alert/sweetalert2.min.css')}}" rel="stylesheet" type="text/css" />
 
     <!-- Styles -->
-{{--    <link href="{{ resource_path('css/app.css') }}" rel="stylesheet">--}}
+    <link href="{{ resource_path('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="sticky-header">
 <section>

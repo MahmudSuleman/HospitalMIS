@@ -26,6 +26,7 @@
 
             <li><a href="{{route('user.index')}}"><i class="fa fa-user"></i> <span>Users</span></a>
             <li><a href="{{route('department.index')}}"><i class="fa fa-home"></i> <span>Departments</span></a>
+            <li><a href="{{route('employee.index')}}"><i class="fa fa-book"></i> <span>Employees</span></a>
 
             </li>
             <li class="menu-list"><a href="javascript:;"><i class="mdi mdi-table"></i> <span>Tables</span></a>

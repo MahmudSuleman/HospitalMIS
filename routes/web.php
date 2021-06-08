@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
         Route::resource('/user', 'Setups\UserController');
 
         Route::resource('/department', 'Setups\DepartmentController');
+
+        Route::resource('/employee', 'Setups\EmployeeController');
     });
 
 });
