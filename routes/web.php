@@ -32,10 +32,11 @@ Route::middleware('auth')->group(function () {
         Route::resource('/department', 'Setups\DepartmentController');
 
         Route::resource('/employee', 'Setups\EmployeeController');
+
+        Route::resource('/patient', 'Setups\PatientController');
     });
 
 });
 
-Route::get('/options', function () {
-});
+Route::get('/options', [\App\Http\Controllers\SetupController::class, 'doctors']);
 

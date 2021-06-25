@@ -7,6 +7,7 @@ namespace App\Services;
 use App\Models\Department;
 use App\Models\Employee;
 use App\Models\EmployeeType;
+use App\Models\Gender;
 use App\Models\Role;
 
 /**
@@ -62,6 +63,24 @@ class SelectOptions
         foreach ($employees as $employee){
             $selected = $employee->id == $selectedIndex ? 'selected' : '';
             $options .= "<option value='{$employee->id}' {$selected}>{$employee->name}</option>";
+        }
+        return $options;
+
+    }
+
+    /**
+     * department select options
+     * pass selected index to select a default value
+     * @param int $selectedIndex
+     * @return string
+     *
+     */
+    public static function Gender($selectedIndex = 0){
+        $genders = Gender::all();
+        $options = "<option value=''>Please Select</option>";
+        foreach ($genders as $gender){
+            $selected = $gender->id == $selectedIndex ? 'selected' : '';
+            $options .= "<option value='{$gender->id}' {$selected}>{$gender->name}</option>";
         }
         return $options;
 
