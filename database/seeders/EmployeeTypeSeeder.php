@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Carbon\Traits\Date;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -16,6 +17,7 @@ class EmployeeTypeSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('employee_types')->truncate();
         $types = ['system admin', 'doctor', 'nurse', 'cleaner', 'security'];
 

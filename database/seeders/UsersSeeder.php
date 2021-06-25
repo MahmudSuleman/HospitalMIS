@@ -17,7 +17,7 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('users')->truncate();
         DB::table('users')->insert([
             'name' => 'Admin',
@@ -27,6 +27,5 @@ class UsersSeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);
-        Model::reguard();
     }
 }
