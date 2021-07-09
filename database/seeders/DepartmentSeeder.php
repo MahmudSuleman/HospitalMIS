@@ -20,7 +20,7 @@ class DepartmentSeeder extends Seeder
 DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('departments')->truncate();
 
-        $departments = ['opd', 'surgery', 'lab', 'pharmacy'];
+        $departments = ['IT','opd', 'surgery', 'lab', 'pharmacy'];
 
         foreach ($departments as $department) {
 

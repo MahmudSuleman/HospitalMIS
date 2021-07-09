@@ -9,15 +9,15 @@ class Patient extends Model
 {
     use HasFactory;
 
-    public function doctor(){
-        return $this->belongsTo(Employee::class);
-    }
+    protected $fillable = ['first_name', 'last_name', 'date_of_birth', 'gender_id'];
 
-    public function department(){
-        return $this->belongsTo(Department::class);
-    }
+
 
     public function gender(){
         return $this->belongsTo(Gender::class);
+    }
+
+    public function checkIn(){
+        return $this->hasMany(CheckIn::class);
     }
 }

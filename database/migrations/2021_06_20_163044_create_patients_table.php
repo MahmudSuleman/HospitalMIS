@@ -15,12 +15,11 @@ class CreatePatientsTable extends Migration
     {
         Schema::create('patients', function (Blueprint $table) {
             $table->id();
-            $table->string('firstName');
-            $table->string('lastName');
-            $table->string('date_of_birth');
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->date('date_of_birth');
+            $table->string('patient_id')->default(uniqid());
             $table->foreignId('gender_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('department_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('employee_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

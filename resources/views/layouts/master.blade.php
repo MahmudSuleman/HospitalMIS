@@ -19,17 +19,28 @@
         <!--sidebar nav start-->
         <ul class="side-navigation">
 
+            @if(Illuminate\Support\Facades\Gate::allows('is-admin'))
 
-            <li>
-                <h3 class="navigation-title">Setups</h3>
-            </li>
+                <li>
+                    <h3 class="navigation-title">Admin</h3>
+                </li>
 
-            <li><a href="{{route('user.index')}}"><i class="fa fa-user"></i> <span>Users</span></a>
-            <li><a href="{{route('department.index')}}"><i class="fa fa-home"></i> <span>Departments</span></a>
-            <li><a href="{{route('employee.index')}}"><i class="fa fa-book"></i> <span>Employees</span></a>
-            <li><a href="{{route('patient.index')}}"><i class="fa fa-bed"></i> <span>Patients</span></a>
+                <li><a href="{{route('user.index')}}"><i class="fa fa-user"></i> <span>Users</span></a>
+                <li><a href="{{route('department.index')}}"><i class="fa fa-home"></i> <span>Departments</span></a>
+                <li><a href="{{route('employee.index')}}"><i class="fa fa-book"></i> <span>Employees</span></a>
+                <li><a href="{{route('patient.index')}}"><i class="fa fa-bed"></i> <span>Patients</span></a>
+                <li><a href="#"><i class="fa fa-sign-in"></i> <span>Check Ins</span></a>
+                <li><a href="#"><i class="fa fa-send"></i> <span>Assign Patients</span></a></li>
+            @endif
 
-            </li>
+            @if(\Illuminate\Support\Facades\Gate::allows('is-doctor'))
+                <li>
+                    <h3 class="navigation-title">Doctor</h3>
+                </li>
+                <li><a href="#"><i class="fa fa-bed"></i> <span>Patients</span></a></li>
+            @endif
+
+
             <li class="menu-list"><a href="javascript:;"><i class="mdi mdi-table"></i> <span>Tables</span></a>
                 <ul class="child-list">
                     <li><a href="#"> Basic Table</a></li>
@@ -45,8 +56,6 @@
                     @csrf
                 </form>
             </li>
-
-
 
 
         </ul><!--sidebar nav end-->

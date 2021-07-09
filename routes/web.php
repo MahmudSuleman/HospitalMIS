@@ -25,7 +25,7 @@ Route::middleware('auth')->group(function () {
         return view('home');
     });
 
-    Route::prefix('setup')->group(function () {
+    Route::prefix('setup')->middleware(['admin-user'])->group(function () {
         Route::put('/user/{user}/changePassword', [UserController::class, 'changePassword'])->name('user.changePassword');
         Route::resource('/user', 'Setups\UserController');
 
@@ -34,9 +34,12 @@ Route::middleware('auth')->group(function () {
         Route::resource('/employee', 'Setups\EmployeeController');
 
         Route::resource('/patient', 'Setups\PatientController');
+
+        // additional routes which are not part of the resource
+        Route::post('/patient/checkin', [\App\Http\Controllers\Setups\PatientController::class, 'checkin'])->name('patient.checkin');
     });
 
 });
 
-Route::get('/options', [\App\Http\Controllers\SetupController::class, 'doctors']);
+//Route::get('/options', [\App\Http\Controllers\SetupController::class, 'doctors']);
 

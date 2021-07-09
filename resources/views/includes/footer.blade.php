@@ -32,5 +32,11 @@
 <!--app js-->
 <script src="{{asset('/syntra/assets/js/jquery.app.js')}}"></script>
 
+<!--Notifications-->
+<script src="{{asset('/syntra/assets/plugins/notifications/notify.min.js')}}"></script>
+<script src="{{asset('/syntra/assets/plugins/notifications/notify-metro.js')}}"></script>
+<script src="{{asset('/syntra/assets/plugins/notifications/notifications.js')}}"></script>
+
+
 </body>
 </html>

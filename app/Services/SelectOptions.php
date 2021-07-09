@@ -9,6 +9,7 @@ use App\Models\Employee;
 use App\Models\EmployeeType;
 use App\Models\Gender;
 use App\Models\Role;
+use App\Models\User;
 
 /**
  * This class stores all the methods to generate various select options
@@ -84,6 +85,16 @@ class SelectOptions
         }
         return $options;
 
+    }
+
+    public static function doctors($selectedIndex = 0){
+        $doctors = User::where('role_id', 2)->get();
+        $options = "<option value=''>Please Select</option>";
+        foreach ($doctors as $doctor){
+            $selected = $doctor->id == $selectedIndex ? 'selected' : '';
+            $options .= "<option $selected  value='{$doctor->id}'>{$doctor->name}</option>";
+        }
+        return $options;
     }
 
 }
