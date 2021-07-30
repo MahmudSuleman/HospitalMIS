@@ -23,7 +23,15 @@ class UsersSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@admin.com',
             'role_id' => 1,
-            'password' => Hash::make('admin'),
+            'password' => Hash::make('1234567890'),
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+        DB::table('users')->insert([
+            'name' => 'Dr. Mudi Wunnam',
+            'email' => 'doctor@doctor.com',
+            'role_id' => 2,
+            'password' => Hash::make('1234567890'),
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now()
         ]);

@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\AdminUser;
+use App\Http\Middleware\DoctorUser;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -55,6 +56,7 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'admin-user' => AdminUser::class,
+        'doctor-user' => DoctorUser::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

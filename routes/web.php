@@ -1,9 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\PatientController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Setups\UserController;
-use App\Http\Controllers\Setups\DepartmentController;
+use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,19 +25,28 @@ Route::middleware('auth')->group(function () {
     Route::get('/', function () {
         return view('home');
     });
+    Route::get('/home', function () {
+        return view('home');
+    });
 
     Route::prefix('setup')->middleware(['admin-user'])->group(function () {
         Route::put('/user/{user}/changePassword', [UserController::class, 'changePassword'])->name('user.changePassword');
-        Route::resource('/user', 'Setups\UserController');
+        Route::resource('/user', 'Admin\UserController');
 
-        Route::resource('/department', 'Setups\DepartmentController');
+        Route::resource('/department', 'Admin\DepartmentController');
 
-        Route::resource('/employee', 'Setups\EmployeeController');
+        Route::resource('/employee', 'Admin\EmployeeController');
 
-        Route::resource('/patient', 'Setups\PatientController');
+        Route::resource('/patient', 'Admin\PatientController');
 
         // additional routes which are not part of the resource
-        Route::post('/patient/checkin', [\App\Http\Controllers\Setups\PatientController::class, 'checkin'])->name('patient.checkin');
+        Route::post('/patient/checkin', [PatientController::class, 'checkin'])->name('patient.checkin');
+    });
+
+    Route::prefix('doctor')->middleware(['doctor-user'])->group(function(){
+        Route::get('/patient', [\App\Http\Controllers\Doctor\PatientController::class, 'index'])->name('doctor.patient');
+        Route::get('/{patient}/diagnose', [\App\Http\Controllers\Doctor\PatientController::class, 'diagnose'])->name('doctor.diagnose');
+        Route::post('/{patient}/diagnose_add', [\App\Http\Controllers\Doctor\PatientController::class, 'diagnose_add'])->name('doctor.diagnose_add');
     });
 
 });

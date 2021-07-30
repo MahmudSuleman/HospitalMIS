@@ -37,7 +37,7 @@
                 <li>
                     <h3 class="navigation-title">Doctor</h3>
                 </li>
-                <li><a href="#"><i class="fa fa-bed"></i> <span>Patients</span></a></li>
+                <li><a href="{{route('doctor.patient')}}"><i class="fa fa-bed"></i> <span>Patients</span></a></li>
             @endif
 
 

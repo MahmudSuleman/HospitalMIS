@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             UserRolesSeeder::class,
             DepartmentSeeder::class,
             GenderSeeder::class,
+            MedicineSeeder::class,
         ]);
     }
 }
