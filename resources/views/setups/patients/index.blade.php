@@ -42,7 +42,7 @@
                         <td>{{$patient->gender->name}}</td>
                         <td>{{$patient->date_of_birth}}</td>
                         <td>
-                            @if(count($patient->checkIn()->where('is_checked_out', 0 )->get()) == 0)
+                            @if(count($patient->checkIn) == 0)
                             <button class="btn btn-success btnAssign" id="{{$patient->id}}" ><i class="fa fa-send"></i> Check In</button>
                             @endif
                                 <a class="btn btn-warning" href="{{route('patient.edit', [$patient])}}"><i class="fa fa-edit"></i> Edit</a>
@@ -119,6 +119,7 @@
 
                 }
             }).done(function( msg ) {
+                console.log(msg)
                 $('#modalAssign').modal('hide');
                 $('#assignForm').trigger('reset')
                 let data = JSON.parse(msg);

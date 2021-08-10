@@ -16,11 +16,11 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
+            DepartmentSeeder::class,
             EmployeeTypeSeeder::class,
             EmployeeSeeder::class,
-            UsersSeeder::class,
             UserRolesSeeder::class,
-            DepartmentSeeder::class,
+            UsersSeeder::class,
             GenderSeeder::class,
             MedicineSeeder::class,
         ]);

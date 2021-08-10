@@ -25,7 +25,9 @@ class PatientController extends Controller
      */
     public function index()
     {
-        $patients = Patient::all();
+        $patients = Patient::with('gender')->with(['checkIn' => function($query){
+            $query->where('is_checked_out' , 0);
+        }])->get();
         return view('setups.patients.index', compact('patients'));
     }
 
@@ -47,7 +49,7 @@ class PatientController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validated = $request->validate([
             'first_name' => ['required', 'min:3'],
             'last_name' => ['required', 'min:3'],
             'date_of_birth' => ['required', 'date'],
@@ -55,7 +57,10 @@ class PatientController extends Controller
 
         ]);
 
-        $patient = Patient::create($request->all());
+        $validated['patient_id'] = uniqid();
+
+//        dd($validated);
+        $patient = Patient::create($validated);
         $patients = Patient::all();
 
         return view('setups.patients.index', compact('patients'))->with('success', 'Patient with card no. {$patient->patient_id}');
@@ -126,10 +131,9 @@ class PatientController extends Controller
             return json_encode(['success'=> false, 'message' => 'Doctor field is required']);
         }
 
-        $patient = \App\Models\CheckIn::where('patient_id', 1)
+        $patient = CheckIn::where('patient_id',$request->patient_id)
             ->where('is_checked_out', 0)
-            ->get()
-            ->all();
+            ->get()->all();
         if(!$patient){
             CheckIn::create($request->all());
             return json_encode(['success' => true]);

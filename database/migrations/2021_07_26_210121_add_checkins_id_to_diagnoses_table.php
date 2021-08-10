@@ -14,7 +14,7 @@ class AddCheckinsIdToDiagnosesTable extends Migration
     public function up()
     {
         Schema::table('diagnoses', function (Blueprint $table) {
-            $table->foreignId('check_in_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+//            $table->foreignId('check_in_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
         });
     }
 

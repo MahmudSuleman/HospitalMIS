@@ -29,7 +29,7 @@ class MedicineSeeder extends Seeder
             'Humira (adalimumab)',
             'Abilify (aripiprazole)'
             ];
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+//        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('medicines')->truncate();
 
         foreach($meds as $med){

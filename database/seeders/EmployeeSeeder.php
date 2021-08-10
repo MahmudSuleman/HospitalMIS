@@ -16,7 +16,9 @@ class EmployeeSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+//        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        DB::table('employees')->truncate();
+
         DB::table('employees')->insert([
             'first_name' => 'system',
             'last_name' => 'admin',

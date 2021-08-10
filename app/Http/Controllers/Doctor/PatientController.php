@@ -18,44 +18,9 @@ class PatientController extends Controller
     {
         $user_id = Auth::id();
 //        patients for currently logged in doctor.
-        $patients = CheckIn::where('user_id', $user_id)->where('is_checked_out', 0)->get();
+        $patients = CheckIn::with('patient')->with('diagnose')->where('user_id', $user_id)->where('is_checked_out', 0)->get();
         return view('doctor.patients.index', compact('patients'));
     }
 
-    public function diagnose(CheckIn $patient)
-    {
-        return view('doctor.patients.diagnose', compact('patient'));
-    }
-
-    public function diagnose_add(Request $request, CheckIn $patient)
-    {
-
-        try {
-            DB::transaction(function () use ($request, $patient){
-                $dig = \App\Models\Diagnose::create([
-                    'check_in_id' => $patient->id,
-                    'observations' => $request->get('observations'),
-                    'symptoms' => $request->get('symptoms'),
-                ]);
-
-                $meds = $request->get('medicine');
-                $dosages = $request->get('dosage');
-                $count = count($meds);
-
-                for ($i = 0 ; $i < $count; $i++){
-                    $dig->prescription()->create([
-                        'medicine_id' => $meds[$i],
-                        'dosage' => $dosages[$i]
-                    ]);
-                }
-
-            });
-
-        }catch(\Exception $e){
-            return ['success' => false, 'message'=>$e->getMessage()];
-        }
-        return response(['success'=> true], 200);
-
-    }
 }
 

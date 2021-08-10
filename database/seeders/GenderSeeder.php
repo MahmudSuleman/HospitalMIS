@@ -17,7 +17,7 @@ class GenderSeeder extends Seeder
     public function run()
     {
         //seed gender
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+//        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('genders')->truncate();
 
         $genders = ['male', 'female'];

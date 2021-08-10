@@ -10,7 +10,7 @@
             </div>
 
             {{--            <form action="{{route('doctor.diagnose_add', [$patient])}}" method="post">--}}
-            <form action="{{route('doctor.diagnose_add', [$patient])}}" id="diagnoseForm" method="post">
+            <form action="{{route('diagnose.store', [$patient])}}" id="diagnoseForm" method="post">
                 @csrf
                 <div class="row">
                     <div class="col-sm-6 offset-sm-3">
@@ -66,12 +66,8 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
-
-
                 <div class="row">
                     <div class="col-sm-6 offset-sm-3">
                         <div class="form-group">
@@ -172,7 +168,6 @@
                     }
                 }
 
-
                 //symptoms data
                 let symptoms_element = $('#symptoms');
                 let symptoms_value = symptoms_element.val();
@@ -195,11 +190,6 @@
                     $('.observations-error').addClass('d-none');
                 }
 
-
-
-
-
-
                 // make a form data inputs
                  let data ={
                     _token: "<?= csrf_token() ?>",
@@ -212,7 +202,7 @@
 
                 //no errors in forms
                 if(errors_count === 0){
-                    $.post("{{route('doctor.diagnose_add', [$patient])}}", data, function(d){
+                    $.post("{{route('diagnose.store', [$patient])}}", data, function(d){
                         console.log(d)
                         try{
                             // let msg = JSON.parse(d);

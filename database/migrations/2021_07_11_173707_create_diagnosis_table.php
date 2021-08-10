@@ -17,6 +17,7 @@ class CreateDiagnosisTable extends Migration
             $table->id();
             $table->string('symptoms');
             $table->string('observations');
+            $table->foreignId('check_in_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
         });
     }

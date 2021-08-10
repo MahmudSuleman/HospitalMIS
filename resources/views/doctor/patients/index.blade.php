@@ -10,6 +10,7 @@
                 </div>
             </div>
             <hr>
+            @include('flash-message')
 
             <table class="table table-striped" id="tbl_user">
                 <thead>
@@ -28,10 +29,10 @@
                         <td>{{$patient->patient->last_name}}</td>
                         <td>
                             @if($patient->diagnose->first() !== null)
-                                <a class="btn btn-warning" href="#"><i
+                                <a class="btn btn-warning" href="{{route('diagnose.show', [$patient])}}"><i
                                         class="fa fa-edit"></i> Review Diagnoses</a>
                             @else
-                                <a class="btn btn-success" href="{{route('doctor.diagnose',  [$patient])}}"><i
+                                <a class="btn btn-success" href="{{route('diagnose.create',  [$patient])}}"><i
                                         class="fa fa-edit"></i> Diagnose</a>
                             @endif
                         </td>

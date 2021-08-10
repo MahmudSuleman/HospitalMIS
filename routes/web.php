@@ -1,22 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\PatientController;
+use App\Http\Controllers\Doctor\DiagnoseController;
+use App\Http\Controllers\Doctor\PrescriptionController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\DepartmentController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
 
 Auth::routes();
 
@@ -44,9 +34,15 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('doctor')->middleware(['doctor-user'])->group(function(){
+        Route::get('/diagnose/{patient}/create', [DiagnoseController::class, 'create'])->name('diagnose.create');
+        Route::post('/diagnose/{patient}/store', [DiagnoseController::class, 'store'])->name('diagnose.store');
+        Route::get('/diagnose/{patient}/show', [DiagnoseController::class, 'show'])->name('diagnose.show');
+        Route::post('/diagnose/{diagnose}/destroy', [DiagnoseController::class, 'destroy'])->name('diagnose.destroy');
         Route::get('/patient', [\App\Http\Controllers\Doctor\PatientController::class, 'index'])->name('doctor.patient');
-        Route::get('/{patient}/diagnose', [\App\Http\Controllers\Doctor\PatientController::class, 'diagnose'])->name('doctor.diagnose');
-        Route::post('/{patient}/diagnose_add', [\App\Http\Controllers\Doctor\PatientController::class, 'diagnose_add'])->name('doctor.diagnose_add');
+
+
+        Route::post('/prescription/{prescription}/destroy', [PrescriptionController::class, 'destroy'])->name('prescription.destroy');
+
     });
 
 });

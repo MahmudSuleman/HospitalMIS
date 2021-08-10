@@ -17,7 +17,7 @@ class DepartmentSeeder extends Seeder
     public function run()
     {
         //seed department
-DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+//DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         DB::table('departments')->truncate();
 
         $departments = ['IT','opd', 'surgery', 'lab', 'pharmacy'];
