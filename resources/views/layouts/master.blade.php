@@ -29,7 +29,14 @@
                 <li><a href="{{route('department.index')}}"><i class="fa fa-home"></i> <span>Departments</span></a>
                 <li><a href="{{route('employee.index')}}"><i class="fa fa-book"></i> <span>Employees</span></a>
                 <li><a href="{{route('patient.index')}}"><i class="fa fa-bed"></i> <span>Patients</span></a>
-                <li><a href="#"><i class="fa fa-sign-in"></i> <span>Check Ins</span></a>
+                <li class="menu-list"><a href="javascript:;">
+                        <i class="mdi mdi-table"></i> <span>Check Ins</span></a>
+                    <ul class="child-list">
+                        <li><a href="{{route('checkins')}}"><i class="fa fa-sign-in"></i> <span>Active</span></a>
+                        <li><a href="{{route('checkins.history')}}"> <i class="fa fa-sign-out"> History</i></a></li>
+
+                    </ul>
+                </li>
                 <li><a href="#"><i class="fa fa-send"></i> <span>Assign Patients</span></a></li>
             @endif
 
@@ -41,7 +48,8 @@
             @endif
 
 
-            <li class="menu-list"><a href="javascript:;"><i class="mdi mdi-table"></i> <span>Tables</span></a>
+            <li class="menu-list"><a href="javascript:;">
+                    <i class="mdi mdi-table"></i> <span>Tables</span></a>
                 <ul class="child-list">
                     <li><a href="#"> Basic Table</a></li>
 

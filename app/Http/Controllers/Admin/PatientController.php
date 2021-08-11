@@ -8,6 +8,7 @@ use App\Models\Patient;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Gate;
@@ -93,7 +94,7 @@ class PatientController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
     public function update(Request $request, $id)
     {
@@ -118,6 +119,12 @@ class PatientController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function checkout($checkIn): RedirectResponse
+    {
+        CheckIn::where(['id' => $checkIn])->update(['is_checked_out' => 1]);
+        return redirect()->back()->with('success', 'Patient Checked Out Successfully');
     }
 
     public function checkin(Request $request){

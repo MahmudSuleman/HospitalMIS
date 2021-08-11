@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Admin\CheckInController;
 use App\Http\Controllers\Admin\PatientController;
 use App\Http\Controllers\Doctor\DiagnoseController;
 use App\Http\Controllers\Doctor\PrescriptionController;
+use App\Models\CheckIn;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\UserController;
@@ -20,6 +22,8 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('setup')->middleware(['admin-user'])->group(function () {
+
+
         Route::put('/user/{user}/changePassword', [UserController::class, 'changePassword'])->name('user.changePassword');
         Route::resource('/user', 'Admin\UserController');
 
@@ -31,6 +35,18 @@ Route::middleware('auth')->group(function () {
 
         // additional routes which are not part of the resource
         Route::post('/patient/checkin', [PatientController::class, 'checkin'])->name('patient.checkin');
+        Route::get('/patient/{checkIn}/checkout', [PatientController::class, 'checkout'])->name('patient.checkout');
+
+        Route::get('/checkins',[CheckInController::class, 'index'] )->name('checkins');
+        Route::get('/checkins/history',[CheckInController::class, 'history'] )->name('checkins.history');
+
+//        invoice route
+        Route::get('/invoice/{checkin}', function( $id){
+            $checkin = CheckIn::find($id);
+
+            return view('invoice', compact('checkin'));
+        })->name('checkins.invoice');
+
     });
 
     Route::prefix('doctor')->middleware(['doctor-user'])->group(function(){
@@ -48,4 +64,3 @@ Route::middleware('auth')->group(function () {
 });
 
 //Route::get('/options', [\App\Http\Controllers\SetupController::class, 'doctors']);
-

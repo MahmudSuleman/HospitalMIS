@@ -36,7 +36,7 @@
                                     <div class="card-body">
                                         <div class="card-title text-center">
                                             <img src="{{asset('syntra/assets/images/logo_sm_2.png')}}" alt="" class="">
-                                            <h5 class="mt-3"><b>Welcome to Syntra</b></h5>
+                                            <h5 class="mt-3"><b>PLEASE LOGIN</b></h5>
                                         </div>
                                         <form method="POST" action="{{ route('login') }}">
                                             @csrf
